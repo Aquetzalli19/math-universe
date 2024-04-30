@@ -1,0 +1,58 @@
+.input_welcome__cotainer{
+    width: 100%;
+    text-align: center;
+
+            
+}
+.input_welcome{
+    font-size: 20px;
+    font-weight: 20px;
+    margin: auto;
+    width: 80%;
+    border-bottom: 3px solid;
+    padding: 10px;
+}
+.welcome_text__contain{
+    text-align: center;
+    padding: 30px;
+}
+.welcome_text{
+    font-size: 50px;
+    font-weight: 800;
+    
+}
+
+.button_welcome{
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+}
+.number_game{
+    font-size: 40px;
+    font-weight: bold;
+
+}
+/* GAME CONTENT */
+
+.inputs_game{
+    border-bottom: 2px solid;
+    padding: 8px;
+    
+
+}
+.operation_contain{
+    padding: 50px;
+    width: 75%;
+    margin: auto;
+    margin-top: 20px;
+    border: 2px solid;
+    border-radius: 15px;
+    text-align: center;
+
+}
+.operation_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}

@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { IonButton, IonInput, InputChangeEventDetail } from '@ionic/react'; // Importa componentes de Ionic
+import { IonButton, IonInput, InputChangeEventDetail, IonText, IonContent } from '@ionic/react'; // Importa componentes de Ionic
 import useGameLogic from './usePlayer'; // Importa el hook useGameLogic
 import ExerciseCard from '../exercises/ExerciseCard';
+import './Home.css';
 
 const Game: React.FC = () => {
   const [numPlayers, setNumPlayers] = useState<number>(0);
@@ -33,7 +34,7 @@ const Game: React.FC = () => {
       setNumPlayers(parseInt(value, 10));
     }
   };
-  
+
 
   const handleInitializePlayersClick = () => {
     setPlayersInitialized(true);
@@ -71,20 +72,31 @@ const Game: React.FC = () => {
   }, [playersInitialized, numPlayers, activePlayerIndex]);
 
   return (
-    <div>
-      <label htmlFor="numPlayers">Número de jugadores:</label>
-      <IonInput type="number" id="numPlayers" value={numPlayers.toString()} onIonChange={handleNumPlayersChange} disabled={playersInitialized} />
-      <IonButton onClick={handleInitializePlayersClick} disabled={playersInitialized}>Inicializar Jugadores</IonButton>
+    <IonContent >
+      <div className="welcome_text__contain">
+        <IonText class='welcome_text'>
+          <label htmlFor="numPlayers" >Número de jugadores:</label>
+        </IonText>
+      </div>
+
+      <div className="input_welcome__cotainer">
+      <IonInput type="number" id="numPlayers" value={numPlayers.toString()} onIonChange={handleNumPlayersChange} disabled={playersInitialized} class="input_welcome" />
+      </div>
+      
+      <IonButton onClick={handleInitializePlayersClick} disabled={playersInitialized} className='button_welcome'>Inicializar Jugadores</IonButton>
       <div style={{ marginBottom: '2rem' }}>
         {exerciseCards.map((exerciseCard, index) => (
-          <div key={index} style={{ border: '1px solid black', padding: '10px', margin: '10px', width: '110rem', height: '72rem' }}>
-            <h3 style={{ color: activePlayerIndex === index ? 'blue' : 'black' }}>Jugador {index + 1}</h3>
+          <div key={index} style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
+            <IonText class='number_game'>
+            <h3 style={{ color: activePlayerIndex === index ? '#4C8DFF' : 'black' }} className='number_game'>Jugador {index + 1}</h3>
+            </IonText>
+            
             {exerciseCard}
             <IonButton onClick={handleNextPlayerClick} disabled={activePlayerIndex !== index}>Siguiente jugador</IonButton>
           </div>
         ))}
       </div>
-    </div>
+    </IonContent>
   );
 };
 

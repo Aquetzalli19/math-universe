@@ -53,7 +53,7 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({ onExerciseCorrect, disabled
             setMovements(parseInt(value, 10));
         }
     };
-    
+
 
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>, exercise: Exercise, exerciseIndex: number) => {
@@ -82,13 +82,19 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({ onExerciseCorrect, disabled
             const isEnabled = enabledIndexes.includes(index);
 
             return (
-                <div key={index}>
+                <div key={index} className='operation_contain'>
                     <p style={{ marginRight: '3rem' }}>{`${exercise.question}`}</p>
                     <form onSubmit={(event) => handleSubmit(event, exercise, index)}>
-                        <IonInput type="text" name="answer" disabled={!isEnabled || disabled} />
-                        <IonButton type="submit" disabled={!isEnabled || disabled || !buttonStates[index]}>
-                            Enviar
-                        </IonButton>
+                        <div className="">
+                            <IonInput type="text" name="answer" disabled={!isEnabled || disabled} className='inputs_game' />
+                        </div>
+
+                        <div className="">
+                            <IonButton type="submit" disabled={!isEnabled || disabled || !buttonStates[index]}>
+                                Enviar
+                            </IonButton>
+                        </div>
+
                     </form>
                 </div>
             );
@@ -97,7 +103,7 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({ onExerciseCorrect, disabled
 
     const renderPlayerCard = (playerExercises: PlayerExercises, playerName: string) => {
         return (
-            <div style={{ border: '1px solid black', padding: '10px', marginTop: '10px', marginBottom: '10rem', width: '100rem' }}>
+            <div style={{ border: '1px solid black', padding: '10px', marginTop: '10px', marginBottom: '10rem' }}>
                 <h3>{playerName}</h3>
                 <IonInput
                     type="number"
@@ -105,30 +111,30 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({ onExerciseCorrect, disabled
                     onIonChange={(e: CustomEvent<InputChangeEventDetail>) => handleMovementsChange(e)}
                     disabled={disabled}
                 />
-    
-                <DiceRoller onDiceRoll={handleDiceRoll}  disabled={disabled} />
+
+                <DiceRoller onDiceRoll={handleDiceRoll} disabled={disabled} />
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <div>
                         <h4>Sumas</h4>
-                        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                        <div className='operation_container'>
                             {renderExercises(selectRandomExercises(playerExercises.adds, 8))}
                         </div>
                     </div>
                     <div>
                         <h4>Restas</h4>
-                        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                        <div className='operation_container'>
                             {renderExercises(selectRandomExercises(playerExercises.subtractions, 8))}
                         </div>
                     </div>
-                    <div>
+                    <div className='operation_container'>
                         <h4>Multiplicaciones</h4>
-                        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                        <div>
                             {renderExercises(selectRandomExercises(playerExercises.multiplications, 8))}
                         </div>
                     </div>
-                    <div>
+                    <div className='operation_container'>
                         <h4>Divisiones</h4>
-                        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                        <div >
                             {renderExercises(selectRandomExercises(playerExercises.divisions, 8))}
                         </div>
                     </div>
@@ -136,14 +142,14 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({ onExerciseCorrect, disabled
             </div>
         );
     };
-    
+
     const playerExercises: PlayerExercises = {
         adds,
         subtractions,
         multiplications,
         divisions
     };
-    
+
     return (
         <div>
             {renderPlayerCard(playerExercises, "Math Universe")}
